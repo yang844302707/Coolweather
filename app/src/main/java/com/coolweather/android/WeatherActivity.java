@@ -42,6 +42,8 @@ public class WeatherActivity extends AppCompatActivity {
 
     private Button navButton;
 
+    private Button add_city;
+
     private TextView titleCity;
 
     private TextView titleUpdateTime;
@@ -93,6 +95,7 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navButton = (Button) findViewById(R.id.nav_button);
+        add_city = (Button) findViewById(R.id.add_c_button);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
@@ -116,6 +119,14 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        add_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ii_1 = new Intent(WeatherActivity.this,Add_cityActivity.class);
+                startActivity(ii_1);
+
             }
         });
         String bingPic = prefs.getString("bing_pic", null);
@@ -220,10 +231,50 @@ public class WeatherActivity extends AppCompatActivity {
             minText.setText(forecast.temperature.min);
             forecastLayout.addView(view);
         }
-        if (weather.aqi != null) {
+      /*  if (weather.aqi != null) {
+            aqiText.setText(weather.aqi.city.aqi);
+            pm25Text.setText(weather.aqi.city.pm25);}*/
+
+        if(weather.aqi != null){
+            int aqi = 0, pm25 = 0;
+            try{
+                aqi = Integer.parseInt(weather.aqi.city.aqi);
+                pm25 = Integer.parseInt(weather.aqi.city.pm25); }
+            catch (Exception e){
+                e.printStackTrace();
+            }
             aqiText.setText(weather.aqi.city.aqi);
             pm25Text.setText(weather.aqi.city.pm25);
+            aqiText.setTextSize(40);
+            pm25Text.setTextSize(40);
+
+            if(aqi == 0)aqiText.setTextColor(Color.WHITE);
+            else if(aqi < 50)aqiText.setTextColor(getResources().getColor(R.color.c1));
+            else if(aqi < 100)aqiText.setTextColor(getResources().getColor(R.color.c2));
+            else if(aqi < 150)aqiText.setTextColor(getResources().getColor(R.color.c3));
+            else if(aqi < 200)aqiText.setTextColor(getResources().getColor(R.color.c4));
+            else if(aqi < 300)aqiText.setTextColor(getResources().getColor(R.color.c5));
+            else if(aqi > 300)aqiText.setTextColor(getResources().getColor(R.color.c6));
+
+            if (pm25 == 0)pm25Text.setTextColor(Color.WHITE);
+            else if(pm25 < 35)pm25Text.setTextColor(getResources().getColor(R.color.c1));
+            else if(pm25 < 75)pm25Text.setTextColor(getResources().getColor(R.color.c2));
+            else if(pm25 < 115)pm25Text.setTextColor(getResources().getColor(R.color.c3));
+            else if(pm25 < 150)pm25Text.setTextColor(getResources().getColor(R.color.c4));
+            else if(pm25 < 250)pm25Text.setTextColor(getResources().getColor(R.color.c5));
+            else if(pm25 > 250)pm25Text.setTextColor(getResources().getColor(R.color.c6));
         }
+        else {
+            aqiText.setTextColor(Color.WHITE);
+            pm25Text.setTextColor(Color.WHITE);
+            aqiText.setText("暂无数据");
+            pm25Text.setText("暂无数据");
+            aqiText.setTextSize(25);
+            pm25Text.setTextSize(25);
+            aqiText.setSingleLine();
+            pm25Text.setSingleLine();
+        }
+
         String comfort = "舒适度：" + weather.suggestion.comfort.info;
         String carWash = "洗车指数：" + weather.suggestion.carWash.info;
         String sport = "运行建议：" + weather.suggestion.sport.info;
