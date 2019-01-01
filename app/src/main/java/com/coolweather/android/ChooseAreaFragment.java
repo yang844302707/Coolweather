@@ -121,6 +121,12 @@ public class ChooseAreaFragment extends Fragment {
                         activity.swipeRefresh.setRefreshing(true);
                         activity.requestWeather(weatherId);
                     }
+                    else  if(getActivity() instanceof Add_cityActivity){
+                        Add_cityActivity add_cityActivity = (Add_cityActivity) getActivity();
+                        add_cityActivity.drawerLayout.closeDrawers();
+                        add_cityActivity.swipeRefresh.setRefreshing(true);
+                        add_cityActivity.requestWeather(weatherId);
+                    }
                 }
             }
         });

@@ -1,12 +1,31 @@
 package com.coolweather.android;
 
+import com.coolweather.android.gson.Now;
+import com.google.gson.annotations.SerializedName;
+
 public class Add_C {
-    private int imageId;
+   /* private int imageId;
     private String city_name;
     private String city_degree;
-    private String city_weather;
+    private String city_weather;*/
+    @SerializedName("city")
+    public String cityName;
 
-    public int getImageId() {
+    @SerializedName("tmp")
+    public String temperature;
+
+    @SerializedName("cond")
+    public Now.More more;
+
+    public class More {
+
+        @SerializedName("txt")
+        public String info;
+
+    }
+
+
+   /* public int getImageId() {
         return imageId;
     }
 
@@ -36,5 +55,5 @@ public class Add_C {
 
     public void setCity_weather(String city_weather) {
         this.city_weather = city_weather;
-    }
+    }*/
 }

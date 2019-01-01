@@ -25,7 +25,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Add_cityActivity"></activity>
+        <activity android:name=".Add_cityActivity"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>
