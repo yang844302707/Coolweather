@@ -47,6 +47,7 @@ public class Add_cityActivity extends AppCompatActivity {
     private Button add_back;
     private Button add_city;
 
+
     private String mWeatherId;
 
     @Override
@@ -135,17 +136,17 @@ public class Add_cityActivity extends AppCompatActivity {
         String degree1 = weather.now.temperature + "℃";
         String weatherInfo1 = weather.now.more.info;
 
-       // for (Forecast forecast : weather.forecastList) {
+
             View view = LayoutInflater.from(this).inflate(R.layout.add, forecastLayout, false);
             ImageView ic1 = (ImageView) view.findViewById(R.id.icon_add) ;
             TextView titleCity1 = (TextView) view.findViewById(R.id.add_c_name);
             TextView degreeText1 = (TextView) view.findViewById(R.id.add_degree_text);
             TextView weatherInfoText1 = (TextView) view.findViewById(R.id.add_weather_info_text);
-           // titleCity1.setText(add_c.cityName);
+            Button close = (Button)view.findViewById(R.id.add_delete);
             titleCity1.setText(cityName1);
             degreeText1.setText(degree1);
             weatherInfoText1.setText(weatherInfo1);
-            //forecastLayout.removeAllViews();
+
             forecastLayout.addView(view);
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -153,13 +154,25 @@ public class Add_cityActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent i_8 = new Intent(Add_cityActivity.this,WeatherActivity.class);
                     startActivity(i_8);
+
+
+
+                }
+            });
+
+            close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    forecastLayout.removeView(view);
+
                 }
             });
 
 
-      // }
+
 
 }
+
 
 }
 

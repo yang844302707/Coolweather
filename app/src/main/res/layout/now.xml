@@ -6,6 +6,20 @@
     android:layout_height="wrap_content"
     android:layout_margin="15dp">
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/city_ic"
+        android:background="@drawable/ic_local"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/title_city1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="30sp" />
+
     <TextView
         android:id="@+id/degree_text"
         android:layout_width="wrap_content"
